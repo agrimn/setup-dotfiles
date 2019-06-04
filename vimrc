@@ -4,11 +4,22 @@ filetype off                  " required
 " Plugins installed"
 so ~/.vim/plugins.vim
 
-"Key bindings to disable arrow keys"
+" Key bindings "
+" ============ "
+" disable arrow keys"
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+" enable fzf "
+map ; :Files<CR>
+" enable nerdTree "
+map <C-o> :NERDTreeToggle<CR>
+" git gutter bindings "
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
+nmap <Leader>hs <Plug>GitGutterStageHunk
+nmap <Leader>hu <Plug>GitGutterUndoHunk
 
 "show line numbers"
 set number
