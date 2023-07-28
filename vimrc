@@ -1,44 +1,37 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+call plug#begin("~/.vim/plugged")
 
-" Plugins installed"
-so ~/.vim/plugins.vim
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-github-dashboard'
+Plug 'itchyny/lightline.vim'
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
 
-" Key bindings "
-" ============ "
-" disable arrow keys"
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+call plug#end()
 
-" enable fzf "
-map ; :Files<CR>
-
-" enable nerdTree "
-map <C-o> :NERDTreeToggle<CR>
-
-" git gutter bindings "
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-nmap <Leader>hs <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterUndoHunk
-
-" light line - makes vim status bars LIT "
-let g:lightline = {
-  \     'active': {
-  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
-  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
-  \     }
-  \ }
+" Enable lightline status bar
 set laststatus=2
-
-"show line numbers"
+set noshowmode
 set number
 
-"Turn on silver searcher"
-let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:airline_solarized_bg='dark'
+" Change the color scheme for lightline
+if !has('gui_running')
+  set t_Co=256
+endif
 
-" helps copy things to clipboard "
-set clipboard=unnamed
+" Changes the lightline status bar colorscheme
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+" NERD Tree mappings C = Ctrl
+" leader is \
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" q should be able to close NERDTree as well if this is the last window and
+" tab open
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" NERDTree commands to focus cursor on file on startup and also open NERDTree
+autocmd VimEnter * NERDTree | wincmd p
