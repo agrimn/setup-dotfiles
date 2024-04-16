@@ -1,17 +1,21 @@
-call plug#begin("~/.vim/plugged")
+call plug#begin()
 
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf'
 
 call plug#end()
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Enable lightline status bar
 set laststatus=2
 set noshowmode
-set number
+set clipboard=unnamed
 
 " Change the color scheme for lightline
 if !has('gui_running')
