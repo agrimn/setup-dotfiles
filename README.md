@@ -19,3 +19,4 @@ My dot files - One day I plan on automating these installation steps so I can dr
 7. Copy over the ~/.zshrc file and `source ~/.zshrc`
 9.  Install neovim - `brew install neovim`
 10. Install Tmux - `brew install tmux`
+11. Install the fuzzy finder - `brew install fzf`
