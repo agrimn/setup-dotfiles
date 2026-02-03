@@ -11,11 +11,11 @@ mkdir -p "$BACKUP_DIR"
 
 backup_if_exists() {
   local target="$1"
+  local filename="$(basename "$target")"
 
   if [ -e "$target" ] || [ -L "$target" ]; then
     echo "📦 Backing up $target"
-    mkdir -p "$BACKUP_DIR/$(dirname "$target")"
-    mv "$target" "$BACKUP_DIR/$target"
+    mv "$target" "$BACKUP_DIR/$filename"
   fi
 }
 
@@ -28,32 +28,59 @@ install_copy() {
   cp -r "$src" "$dest"
 }
 
+ask_install() {
+  local name="$1"
+  read -p "Install $name? (y/n): " -n 1 -r
+  echo
+  [[ $REPLY =~ ^[Yy]$ ]]
+}
+
 ########################
 # Zsh
 ########################
 
-ZSHRC_SRC="$REPO_ROOT/.zshrc"
-ZSHRC_DEST="$HOME/.zshrc"
+if ask_install "Zsh (.zshrc)"; then
+  ZSHRC_SRC="$REPO_ROOT/.zshrc"
+  ZSHRC_DEST="$HOME/.zshrc"
 
-if [ -f "$ZSHRC_SRC" ]; then
-  backup_if_exists "$ZSHRC_DEST"
-  install_copy "$ZSHRC_SRC" "$ZSHRC_DEST"
-else
-  echo "⚠️  No .zshrc found in repo, skipping"
+  if [ -f "$ZSHRC_SRC" ]; then
+    backup_if_exists "$ZSHRC_DEST"
+    install_copy "$ZSHRC_SRC" "$ZSHRC_DEST"
+  else
+    echo "⚠️  No .zshrc found in repo, skipping"
+  fi
 fi
 
 ########################
 # Neovim
 ########################
 
-NVIM_SRC="$REPO_ROOT/nvim"
-NVIM_DEST="$HOME/.config/nvim"
+if ask_install "Neovim config"; then
+  NVIM_SRC="$REPO_ROOT/nvim"
+  NVIM_DEST="$HOME/.config/nvim"
 
-if [ -d "$NVIM_SRC" ]; then
-  backup_if_exists "$NVIM_DEST"
-  install_copy "$NVIM_SRC" "$NVIM_DEST"
-else
-  echo "⚠️  No nvim directory found, skipping"
+  if [ -d "$NVIM_SRC" ]; then
+    backup_if_exists "$NVIM_DEST"
+    install_copy "$NVIM_SRC" "$NVIM_DEST"
+  else
+    echo "⚠️  No nvim directory found, skipping"
+  fi
+fi
+
+########################
+# Tmux
+########################
+
+if ask_install "Tmux (.tmux.conf)"; then
+  TMUX_SRC="$REPO_ROOT/tmux.conf"
+  TMUX_DEST="$HOME/.tmux.conf"
+
+  if [ -f "$TMUX_SRC" ]; then
+    backup_if_exists "$TMUX_DEST"
+    install_copy "$TMUX_SRC" "$TMUX_DEST"
+  else
+    echo "⚠️  No tmux.conf found in repo, skipping"
+  fi
 fi
 
 echo
