@@ -13,11 +13,15 @@ local opts = {
   silent = true,
 }
 
--- better window navigation
+-- Window navigation (fallback to basic vim commands)
 map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
+
+-- Quick jump to windows
+map("n", "<leader>h", "<C-w>h", opts)
+map("n", "<leader>l", "<C-w>l", opts)
 
 -- Clear search highlight
 map("n", "<leader>nh", "<cmd>nohlsearch<CR>", opts)
