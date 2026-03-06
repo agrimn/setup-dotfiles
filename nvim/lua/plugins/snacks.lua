@@ -4,10 +4,15 @@ return {
     explorer = {
       -- Fixed, predictable width
       width = 30,
-      -- Don’t steal focus when opening
-      focus = false,
+      -- Focus explorer when opening
+      focus = true,
       -- Keep window layout stable
       auto_close = false,
+    },
+    picker = {
+      enabled = true,
+      ui_select = true,
+      focus = "input",
     },
   },
 }
