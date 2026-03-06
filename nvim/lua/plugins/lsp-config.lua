@@ -12,7 +12,7 @@ return {
       ensure_installed = {
         "lua_ls", -- Lua
         "pyright", -- Python
-        "ts_ls", -- TypeScript/JavaScript
+        "vtsls", -- TypeScript/JavaScript
         "rust_analyzer", -- Rust
         "clangd", -- C/C++
         "jdtls", -- Java
@@ -29,10 +29,14 @@ return {
     dependencies = { 
       "nvim-telescope/telescope.nvim",
       "mfussenegger/nvim-jdtls",
+      { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       local lspconfig = require("lspconfig")
       local builtin = require("telescope.builtin")
+
+      -- Enhanced capabilities for better completions
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
 
       -- Keybindings on LSP attach
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -51,11 +55,11 @@ return {
         end,
       })
 
-      lspconfig.lua_ls.setup({})
-      lspconfig.pyright.setup({})
-      lspconfig.ts_ls.setup({})
-      lspconfig.rust_analyzer.setup({})
-      lspconfig.clangd.setup({})
+      lspconfig.lua_ls.setup({ capabilities = capabilities })
+      lspconfig.pyright.setup({ capabilities = capabilities })
+      lspconfig.vtsls.setup({ capabilities = capabilities })
+      lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+      lspconfig.clangd.setup({ capabilities = capabilities })
       -- jdtls handled by nvim-jdtls plugin via FileType autocmd
     end,
   },
