@@ -1,5 +1,6 @@
 # setup-dotfiles
-My dot files - One day I plan on automating these installation steps so I can drop a script on a new mac like a 🥷
+~~My dot files - One day I plan on automating these installation steps so I can drop a script on a new mac like a 🥷~~
+Install now using scripts/install.sh
 
 
 ## Installation steps
