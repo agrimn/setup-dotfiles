@@ -39,9 +39,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
--- JSON prettify / minimize
+-- JSON prettify / minimize/ stringify/ unstringify
 map("n", "<leader>jp", "<cmd>%!jq .<CR>", { desc = "JSON Prettify" })
 map("n", "<leader>jm", "<cmd>%!jq -c .<CR>", { desc = "JSON Minimize" })
+map("n", "<leader>js", "<cmd>%!jq -c . | jq -Rs .<CR>", { desc = "JSON Stringify" })
+map("n", "<leader>ju", "<cmd>%!jq -r .<CR>", { desc = "JSON Unstringify" })
 
 -- Disable nvim 0.11 built-in LSP defaults that conflict with LazyVim/Telescope
 -- grr = references, gra = code action, gri = implementation, grn = rename
