@@ -8,6 +8,8 @@ return {
       focus = true,
       -- Keep window layout stable
       auto_close = false,
+      -- Show hidden/dot files
+      hidden = true,
     },
     picker = {
       enabled = true,
