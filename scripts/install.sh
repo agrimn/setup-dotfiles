@@ -56,7 +56,7 @@ ask_install() {
 ########################
 
 if ask_install "Zsh (.zshrc)" "$HOME/.zshrc"; then
-  ZSHRC_SRC="$REPO_ROOT/.zshrc"
+  ZSHRC_SRC="$REPO_ROOT/zshrc"
   ZSHRC_DEST="$HOME/.zshrc"
 
   if [ -f "$ZSHRC_SRC" ]; then

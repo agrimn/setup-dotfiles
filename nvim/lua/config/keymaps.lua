@@ -13,11 +13,9 @@ local opts = {
   silent = true,
 }
 
--- Window navigation (fallback to basic vim commands)
-map("n", "<C-h>", "<C-w>h", opts)
-map("n", "<C-j>", "<C-w>j", opts)
-map("n", "<C-k>", "<C-w>k", opts)
-map("n", "<C-l>", "<C-w>l", opts)
+-- Window navigation is owned by vim-tmux-navigator (<C-h/j/k/l>).
+-- Do NOT map them here: lazy.nvim's `keys` stub wins anyway, so these were dead
+-- code, and having two sources for the same key made the conflict invisible.
 
 -- Quick jump to windows
 map("n", "<leader>h", "<C-w>h", opts)
@@ -44,6 +42,9 @@ map("n", "<leader>jp", "<cmd>%!jq .<CR>", { desc = "JSON Prettify" })
 map("n", "<leader>jm", "<cmd>%!jq -c .<CR>", { desc = "JSON Minimize" })
 map("n", "<leader>js", "<cmd>%!jq -c . | jq -Rs .<CR>", { desc = "JSON Stringify" })
 map("n", "<leader>ju", "<cmd>%!jq -r .<CR>", { desc = "JSON Unstringify" })
+
+-- Terminal
+map("n", "<leader>tt", "<cmd>split | terminal<CR>", { desc = "Open terminal" })
 
 -- Disable nvim 0.11 built-in LSP defaults that conflict with LazyVim/Telescope
 -- grr = references, gra = code action, gri = implementation, grn = rename
